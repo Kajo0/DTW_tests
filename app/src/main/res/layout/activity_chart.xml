@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chart_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/chart_open_x"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chart X axis" />
+
+            <Button
+                android:id="@+id/chart_open_y"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chart Y axis" />
+
+            <Button
+                android:id="@+id/chart_open_z"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chart Z axis" />
+
+            <Button
+                android:id="@+id/chart_open_cumulated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chart cumulated" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" " />
+
+            <Button
+                android:id="@+id/chart_open_diff_x"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diff chart X axis" />
+
+            <Button
+                android:id="@+id/chart_open_diff_y"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diff chart Y axis" />
+
+            <Button
+                android:id="@+id/chart_open_diff_z"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diff chart Z axis" />
+
+            <Button
+                android:id="@+id/chart_open_diff_cumulated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Diff chart cumulated" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

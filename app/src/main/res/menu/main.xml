@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/move_activity"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="Move things"/>
+    <item
+        android:id="@+id/draw_activity"
+        android:orderInCategory="101"
+        android:showAsAction="never"
+        android:title="Draw things"/>
+
+</menu>
