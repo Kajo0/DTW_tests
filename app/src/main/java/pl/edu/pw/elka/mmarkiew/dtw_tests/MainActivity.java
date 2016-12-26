@@ -13,30 +13,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
-import org.achartengine.model.TimeSeries;
-import org.achartengine.model.XYMultipleSeriesDataset;
-import org.achartengine.renderer.XYMultipleSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer;
-import org.achartengine.renderer.XYSeriesRenderer.FillOutsideLine;
-
-import pl.edu.pw.elka.mmarkiew.dtw.DTW;
-import pl.edu.pw.elka.mmarkiew.dtw.struct.TimeData;
-import pl.edu.pw.elka.mmarkiew.dtw.struct.TimeSerie;
-import pl.edu.pw.elka.mmarkiew.dtw.util.FileUtils;
-import pl.edu.pw.elka.mmarkiew.dtw.util.ProcessingMethods;
-import pl.edu.pw.elka.mmarkiew.dtw.util.ProcessingMethods.Methods;
-import pl.edu.pw.elka.mmarkiew.dtw_tests.draw.DrawActivity;
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,6 +47,20 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
+import org.achartengine.model.TimeSeries;
+import org.achartengine.model.XYMultipleSeriesDataset;
+import org.achartengine.renderer.XYMultipleSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer;
+import org.achartengine.renderer.XYSeriesRenderer.FillOutsideLine;
+import pl.edu.pw.elka.mmarkiew.dtw.DTW;
+import pl.edu.pw.elka.mmarkiew.dtw.struct.TimeData;
+import pl.edu.pw.elka.mmarkiew.dtw.struct.TimeSerie;
+import pl.edu.pw.elka.mmarkiew.dtw.util.FileUtils;
+import pl.edu.pw.elka.mmarkiew.dtw.util.ProcessingMethods;
+import pl.edu.pw.elka.mmarkiew.dtw.util.ProcessingMethods.Methods;
+import pl.edu.pw.elka.mmarkiew.dtw_tests.draw.DrawActivity;
 
 public class MainActivity extends CollectingBaseActivity implements OnClickListener {
 
@@ -300,6 +304,17 @@ public class MainActivity extends CollectingBaseActivity implements OnClickListe
         //
         // LinearLayout layout = (LinearLayout) findViewById(R.id.tab_chart);
         // layout.addView(mChart);
+
+        requestWritePermission();
+    }
+
+    private void requestWritePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1867);
+            }
+        }
     }
 
     @Override
@@ -445,7 +460,7 @@ public class MainActivity extends CollectingBaseActivity implements OnClickListe
                             Toast.makeText(MainActivity.this, "Not saved", Toast.LENGTH_SHORT)
                                     .show();
                         } else {
-                            if (new File(DIR, filename).exists())
+                            if (new File(DIR_RESULTS, filename).exists())
                                 new AlertDialog.Builder(MainActivity.this)
                                         .setTitle("File already exists")
                                         .setMessage("Override?")
@@ -480,7 +495,7 @@ public class MainActivity extends CollectingBaseActivity implements OnClickListe
                     private void saveToFile(final String filename) {
                         try {
                             String data = FileUtils.convertPointsToString(mSaveFilteredData);
-                            FileUtils.saveToFile(DIR, filename, data);
+                            FileUtils.saveToFile(DIR_RESULTS, filename, data);
                         } catch (Exception e) {
                             e.printStackTrace();
 
@@ -490,7 +505,7 @@ public class MainActivity extends CollectingBaseActivity implements OnClickListe
                             return;
                         }
 
-                        Toast.makeText(MainActivity.this, "Saved into: " + DIR + "/" + filename,
+                        Toast.makeText(MainActivity.this, "Saved into: " + DIR_RESULTS + "/" + filename,
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
