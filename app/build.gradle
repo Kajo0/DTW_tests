@@ -21,7 +21,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation files('libs/achartengine-1.1.0.jar')
     implementation files('libs/dtw-1.0.jar')
 }
